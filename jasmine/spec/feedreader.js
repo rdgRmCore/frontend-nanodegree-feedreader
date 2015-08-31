@@ -72,11 +72,13 @@ $(function() {
           * clicked and does it hide when clicked again.
           */
          it('changes state when clicked', function() {
-             menuIcon = $('.menu-icon-link');
+             var menuIcon = $('.menu-icon-link');
 
+             // use jQuery to trigger a click event and make sure menu is not hidden
              menuIcon.trigger('click');
              expect($('body').hasClass('menu-hidden')).toBe(false);
 
+             // use jQuery to trigger a click event and make sure menu is hidden
              menuIcon.trigger('click');
              expect($('body').hasClass('menu-hidden')).toBe(true);
          });
@@ -87,6 +89,9 @@ $(function() {
     describe('Initial Entries', function() {
 
         beforeEach(function(done){
+            // clear the items from the feed
+            $('.feed').empty();
+
             loadFeed(0, function(){
                 done();
             });
@@ -99,7 +104,8 @@ $(function() {
          * the use of Jasmine's beforeEach and asynchronous done() function.
          */
          it('has at least one element', function(done) {
-             numEntries = $('.feed').find('.entry').size();
+             // use jQuery to check that there items with class entry in the div
+             // that has class feed
              expect($('.feed').find('.entry').size()).toBeGreaterThan(0);
              done();
          });
@@ -107,10 +113,39 @@ $(function() {
 
     /* A new test suite named "New Feed Selection" */
     describe('New Feed Selection', function() {
+        var beforeHeadlines,
+            afterHeadlines;
 
-        /* TODO: Write a test that ensures when a new feed is loaded
+        beforeEach(function(done){
+            $('.feed').empty();
+
+            // load feed 0 and grab the headlines
+            loadFeed(0, function(){
+                //use jQuery to get the text of any h2 elements in the feed div
+                beforeHeadlines = $('.feed').find('h2').text();
+            });
+
+            // now load feed 1 and grab the headlines
+            loadFeed(1, function(){
+                //use jQuery to get the text of any h2 elements in the feed div
+                afterHeadlines = $('.feed').find('h2').text();
+                done();
+            });
+        });
+
+
+        /* A test that ensures when a new feed is loaded
          * by the loadFeed function that the content actually changes.
          * Remember, loadFeed() is asynchronous.
          */
+         it('changes content', function(done) {
+            // make sure entries were actually retrieved from the api
+            expect(beforeHeadlines).toBeDefined();
+            expect(afterHeadlines).toBeDefined();
+
+            // make sure the content is changed 
+            expect(beforeHeadlines).not.toEqual(afterHeadlines);
+            done();
+         });
     });
 }());
