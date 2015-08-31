@@ -1,3 +1,6 @@
+// Whole-script strict mode syntax
+"use strict";
+
 /* feedreader.js
  *
  * This is the spec file that Jasmine will read and contains
@@ -31,24 +34,24 @@ $(function() {
          * in the allFeeds object and ensures it has a URL defined
          * and that the URL is not empty.
          */
-         it('urls are defined', function() {
-             allFeeds.forEach(function(feed){
-               expect(feed.url).toBeDefined();
-               expect(feed.url.length).not.toBe(0);
-             });
-         });
+        it('urls are defined', function() {
+            allFeeds.forEach(function(feed){
+                expect(feed.url).toBeDefined();
+                expect(feed.url.length).not.toBe(0);
+            });
+        });
 
 
         /* A test that loops through each feed
          * in the allFeeds object and ensures it has a name defined
          * and that the name is not empty.
          */
-         it('names are defined', function() {
-             allFeeds.forEach(function(feed){
-               expect(feed.name).toBeDefined();
-               expect(feed.name.length).not.toBe(0);
-             });
-         });
+        it('names are defined', function() {
+            allFeeds.forEach(function(feed){
+                expect(feed.name).toBeDefined();
+                expect(feed.name.length).not.toBe(0);
+            });
+        });
     });
 
 
@@ -61,28 +64,26 @@ $(function() {
          * the CSS to determine how we're performing the
          * hiding/showing of the menu element.
          */
-         it('is hidden by default', function() {
-             expect($('body').hasClass('menu-hidden')).toBe(true);
-         });
-         
+        it('is hidden by default', function() {
+            expect($('body').hasClass('menu-hidden')).toBe(true);
+        });
 
-         /* A test that ensures the menu changes
-          * visibility when the menu icon is clicked. This test
-          * should have two expectations: does the menu display when
-          * clicked and does it hide when clicked again.
-          */
-         it('changes state when clicked', function() {
-             var menuIcon = $('.menu-icon-link');
+        /* A test that ensures the menu changes
+         * visibility when the menu icon is clicked. This test
+         * should have two expectations: does the menu display when
+         * clicked and does it hide when clicked again.
+         */
+        it('changes state when clicked', function() {
+            var menuIcon = $('.menu-icon-link');
 
-             // use jQuery to trigger a click event and make sure menu is not hidden
-             menuIcon.trigger('click');
-             expect($('body').hasClass('menu-hidden')).toBe(false);
+            // use jQuery to trigger a click event and make sure menu is not hidden
+            menuIcon.trigger('click');
+            expect($('body').hasClass('menu-hidden')).toBe(false);
 
-             // use jQuery to trigger a click event and make sure menu is hidden
-             menuIcon.trigger('click');
-             expect($('body').hasClass('menu-hidden')).toBe(true);
-         });
-
+            // use jQuery to trigger a click event and make sure menu is hidden
+            menuIcon.trigger('click');
+            expect($('body').hasClass('menu-hidden')).toBe(true);
+        });
     });
 
     /* A new test suite named "Initial Entries" */
@@ -103,12 +104,12 @@ $(function() {
          * Remember, loadFeed() is asynchronous so this test wil require
          * the use of Jasmine's beforeEach and asynchronous done() function.
          */
-         it('has at least one element', function(done) {
-             // use jQuery to check that there items with class entry in the div
-             // that has class feed
-             expect($('.feed').find('.entry').size()).toBeGreaterThan(0);
-             done();
-         });
+        it('has at least one element', function(done) {
+            // use jQuery to check that there items with class entry in the div
+            // that has class feed
+            expect($('.feed').find('.entry').size()).toBeGreaterThan(0);
+            done();
+        });
     });
 
     /* A new test suite named "New Feed Selection" */
@@ -133,19 +134,18 @@ $(function() {
             });
         });
 
-
         /* A test that ensures when a new feed is loaded
          * by the loadFeed function that the content actually changes.
          * Remember, loadFeed() is asynchronous.
          */
-         it('changes content', function(done) {
+        it('changes content', function(done) {
             // make sure entries were actually retrieved from the api
             expect(beforeHeadlines).toBeDefined();
             expect(afterHeadlines).toBeDefined();
 
-            // make sure the content is changed 
+            // make sure the content is changed
             expect(beforeHeadlines).not.toEqual(afterHeadlines);
             done();
-         });
+        });
     });
 }());
