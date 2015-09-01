@@ -124,13 +124,13 @@ $(function() {
             loadFeed(0, function(){
                 //use jQuery to get the text of any h2 elements in the feed div
                 beforeHeadlines = $('.feed').find('h2').text();
-            });
 
-            // now load feed 1 and grab the headlines
-            loadFeed(1, function(){
-                //use jQuery to get the text of any h2 elements in the feed div
-                afterHeadlines = $('.feed').find('h2').text();
-                done();
+                // now load feed 1 and grab the headlines
+                loadFeed(1, function(){
+                    //use jQuery to get the text of any h2 elements in the feed div
+                    afterHeadlines = $('.feed').find('h2').text();
+                    done();
+                });
             });
         });
 
